@@ -20,4 +20,18 @@ public class RaidTest extends BaseTest {
         Assert.assertFalse(actualTitle.isEmpty(), "Page title should not be empty");
 
     }
+    @Test(description = "Verify that the home button is visible and clickable")
+    public void verifyHomeButtonIsVisibleAndClickable() {
+        // Instantiate the RaidPage object
+        RaidPage raidPage = new RaidPage(page);
+
+        // Navigate to the Raid application
+        raidPage.navigateToRaidPage();
+
+        // Asser that the home button is visible
+        Assert.assertTrue(raidPage.isHomeButtonVisible(), "Home button is not visible");
+
+        // Click the Home Button
+        raidPage.clickHomeButton();
+    }
 }
