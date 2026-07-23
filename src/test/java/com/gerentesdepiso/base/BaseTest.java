@@ -2,6 +2,7 @@ package com.gerentesdepiso.base;
 
 import com.microsoft.playwright.*;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 
@@ -43,7 +44,22 @@ public class BaseTest {
        page.navigate("https://www.google.com");
 
     }
-
+    @AfterMethod
+    public void tearDown() {
+        // Cierre ordenado de los recursos al finalizar CADA prueba
+        if (page != null) {
+            page.close();
+        }
+        if (context != null) {
+            context.close();
+        }
+        if (browser != null) {
+            browser.close();
+        }
+        if (playwright != null) {
+            playwright.close();
+        }
+    }
 }
 
 

@@ -13,16 +13,20 @@ public class RaidPage {
 
     // Private variables (Fields)
     private final Page page;
-    private final String pageUrl = "https://gerentesdepiso.online/raid" ;
+    private final String pageUrl = "https://gerentesdepiso.online" ;
 
     // Locators
-    private final Locator homeButton;
+    private final Locator applicationButton;
+    private final Locator openRaidRegisterButton;
 
     // Class constructor
     public RaidPage(Page page) {
         this.page = page;
-        //Locator for the home button/link using its accesible role ande visible name
-        this.homeButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Inicio").setExact(true));
+        //Locator for the ap button/link using its accesible role and visible name
+        this.applicationButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Postular a raid 12.1").setExact(true));
+
+        // Best Practice: Locate "Abrir registro raid" button by accessible role and visible text name
+        this.openRaidRegisterButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Abrir registro raid").setExact(true));
     }
 
     /**
@@ -41,15 +45,41 @@ public class RaidPage {
     }
 
     /**
-     * Checks if the Home Button is visible on the page.
-     * @return boolean true if visible, false otherwise
+     * Retrieves the current URL of the page.
+     * @return String containing current page URL
      */
-    public boolean isHomeButtonVisible() {
-        return homeButton.isVisible();
+    public String getCurrentUrl() {
+        return page.url();
     }
 
-    public void clickHomeButton() {
-        homeButton.click();
+    /**
+     * Checks if the postulation button is visible on the page.
+     * @return boolean true if visible, false otherwise
+     */
+    public boolean isClickApplyButtonVisible() {
+        return applicationButton.isVisible();
+    }
+
+    /**
+     * Clicks on the apply for raid button.
+     */
+    public void clickApplyButton() {
+        applicationButton.click();
+    }
+
+    /**
+     * Checks if the "Abrir registro raid" button is visible.
+     * @return boolean true if visible, false otherwise.
+     */
+    public boolean isOpenRaidRegisterButtonVisible() {
+        return openRaidRegisterButton.isVisible();
+    }
+
+    /**
+     * Clicks on the "Abrir registro raid" button.
+     */
+    public void clickOpenRaidRegisterButton() {
+        openRaidRegisterButton.click();
     }
 
 
