@@ -18,6 +18,9 @@ public class RaidPage {
     // Locators
     private final Locator applicationButton;
     private final Locator openRaidRegisterButton;
+    private final Locator discordInstructionText;
+    private final Locator discordLoginButton;
+
 
     // Class constructor
     public RaidPage(Page page) {
@@ -27,6 +30,12 @@ public class RaidPage {
 
         // Best Practice: Locate "Abrir registro raid" button by accessible role and visible text name
         this.openRaidRegisterButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Abrir registro raid").setExact(true));
+
+        this.discordInstructionText = page.getByText("Inicia sesión con Discord para registrar tu personaje.");
+
+        this.discordLoginButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cuenta Discord"))
+                .or(page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Discord")));
+
     }
 
     /**
@@ -81,6 +90,28 @@ public class RaidPage {
     public void clickOpenRaidRegisterButton() {
         openRaidRegisterButton.click();
     }
+
+    /**
+     * Checks if the login intruction text for discord is visible
+     * @return boolean true is visible false otherwise
+     */
+    public boolean isDiscordIntructionTextVisible() {
+        return discordInstructionText.isVisible();
+    }
+
+    /**
+     * Checks if the Discord login button or element is visible.
+     * @return boolean true ir visible, false otherwise.
+     */
+    public boolean isDiscordLoginButtonVisible() {
+        return discordLoginButton.isVisible();
+    }
+
+    public void clickDiscordLoginButton() {
+        discordLoginButton.click();
+    }
+
+
 
 
 }

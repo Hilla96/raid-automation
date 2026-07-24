@@ -40,4 +40,28 @@ public class RaidTest extends BaseTest {
         // Verify that the 'Abrir registro raid' button is visible in the new section
         Assert.assertTrue(raidPage.isOpenRaidRegisterButtonVisible(), "Open raid register button is not visible");
     }
+
+    @Test(description = "Verify that opening raid registration display the Discord login instruction")
+    public void verifyOpeningRaidRegistrationDisplayInstruction() {
+
+        RaidPage raidPage = new RaidPage(page);
+        raidPage.navigateToRaidPage();
+
+        raidPage.clickApplyButton();
+
+        Assert.assertTrue(raidPage.isOpenRaidRegisterButtonVisible(), "Open raid register button is not visible");
+        raidPage.clickOpenRaidRegisterButton() ;
+
+        Assert.assertTrue(raidPage.isDiscordIntructionTextVisible(),"Discord login instruction text be visible to the user");
+    }
+
+    @Test(description = "Verify that Discord login button is displayed and clickable in navigation bar")
+    public void verifyDiscordLoginButtonIsVisibleAndClickable() {
+        RaidPage raidPage = new RaidPage(page);
+        raidPage.navigateToRaidPage();
+
+        // Direct assertion on the header button
+        Assert.assertTrue(raidPage.isDiscordLoginButtonVisible(), "Discord login button in header should be visible");
+        raidPage.clickDiscordLoginButton();
+    }
 }
